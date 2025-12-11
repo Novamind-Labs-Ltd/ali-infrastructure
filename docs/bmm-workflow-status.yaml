@@ -1,0 +1,119 @@
+# Workflow Status Template
+
+# This tracks progress through BMM methodology Analysis, Planning, and Solutioning phases.
+# Implementation phase is tracked separately in sprint-status.yaml
+
+# STATUS DEFINITIONS:
+# ==================
+# Initial Status (before completion):
+#   - required: Must be completed to progress
+#   - optional: Can be completed but not required
+#   - recommended: Strongly suggested but not required
+#   - conditional: Required only if certain conditions met (e.g., if_has_ui)
+#
+# Completion Status:
+#   - {file-path}: File created/found (e.g., "docs/product-brief.md")
+#   - skipped: Optional/conditional workflow that was skipped
+
+generated: "2025-12-10T08:45:08Z"
+project: "ali-infrastructure"
+project_type: "software"
+selected_track: "enterprise"
+field_type: "greenfield"
+brainstorm_requested: true
+research_requested: true
+product_brief_requested: true
+workflow_path: "enterprise-greenfield.yaml"
+workflow_status:
+  - phase: 0
+    name: "Discovery (Required)"
+    workflows:
+      - id: "brainstorm-project"
+        title: "Brainstorm Project"
+        agent: "analyst"
+        command: "brainstorm-project"
+        status: "optional"
+        included: true
+        completion: "docs/analysis/brainstorming-session-2025-12-10.md"
+        note: "Uses core brainstorming workflow with project context template"
+      - id: "research"
+        title: "Research"
+        agent: "analyst"
+        command: "research"
+        status: "recommended"
+        included: true
+        completion: "docs/prd.md"
+        note: "Domain and compliance research"
+      - id: "product-brief"
+        title: "Product Brief"
+        agent: "analyst"
+        command: "product-brief"
+        status: "recommended"
+        included: true
+        completion: "docs/analysis/product-brief-ali-infrastructure-2025-12-11.md"
+        note: "Strategic alignment brief"
+  - phase: 1
+    name: "Planning"
+    workflows:
+      - id: "prd"
+        title: "Product Requirements"
+        agent: "pm"
+        command: "prd"
+        status: "required"
+        completion: "docs/prd.md"
+        note: "Comprehensive enterprise PRD"
+      - id: "create-ux-design"
+        title: "Create UX Design"
+        agent: "ux-designer"
+        command: "create-ux-design"
+        status: "recommended"
+        completion: "pending"
+        note: "Design system and patterns"
+  - phase: 2
+    name: "Solutioning"
+    workflows:
+      - id: "create-architecture"
+        title: "Create Architecture"
+        agent: "architect"
+        command: "create-architecture"
+        status: "required"
+        completion: "pending"
+        note: "Enterprise-grade system architecture"
+      - id: "test-design"
+        title: "Test Design"
+        agent: "tea"
+        command: "test-design"
+        status: "required"
+        completion: "pending"
+        note: "System-level testability review"
+      - id: "validate-architecture"
+        title: "Validate Architecture"
+        agent: "architect"
+        command: "validate-architecture"
+        status: "recommended"
+        completion: "pending"
+        note: "Architecture validation"
+      - id: "create-epics-and-stories"
+        title: "Create Epics and Stories"
+        agent: "pm"
+        command: "create-epics-and-stories"
+        status: "required"
+        completion: "pending"
+        note: "Break PRD into epics/stories"
+      - id: "implementation-readiness"
+        title: "Implementation Readiness"
+        agent: "architect"
+        command: "implementation-readiness"
+        status: "required"
+        completion: "pending"
+        note: "Validate PRD + Architecture + Epics"
+  - phase: 3
+    name: "Implementation"
+    workflows:
+      - id: "sprint-planning"
+        title: "Sprint Planning"
+        agent: "sm"
+        command: "sprint-planning"
+        status: "required"
+        completion: "pending"
+        note: "Plan implementation phases"
