@@ -1,0 +1,13 @@
+# Example values for running the remote state bootstrap module.
+region                    = "ap-southeast-1"
+profile                   = "CloudSSOProfile"
+bucket_name               = "tfstate-sandbox"
+table_store_instance_name = "tfstate-sandbox"
+lock_table_name           = "terraform_state_lock"
+table_store_description   = "Terraform remote state locking"
+table_store_instance_type = "HighPerformance"
+table_store_access_mode   = "Any"
+tags = {
+  project = "ali-infrastructure"
+  env     = "bootstrap"
+}
