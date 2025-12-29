@@ -118,3 +118,20 @@ __pycache__/
 *.sqlite
 *.db
 
+##############################################
+# Terraform State & Local Artifacts
+##############################################
+
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+terraform.tfvars
+
+# AI Agents
+.bmad
+.claude
+.gemini
+.agent
+.codex
+.github/agents

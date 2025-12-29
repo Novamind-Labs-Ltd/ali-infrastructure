@@ -1,0 +1,6 @@
+region = "ap-southeast-1"
+bucket = "tfstate-sandbox"
+key    = "envs/dev/terraform.tfstate"
+profile = "CloudSSOProfile"
+tablestore_table    = "terraform_state_lock"
+tablestore_endpoint = "https://tfstate-sandbox.ap-southeast-1.ots.aliyuncs.com"

@@ -1,0 +1,63 @@
+# generated: 2025-12-24 20:23:39
+# project: ali-infrastructure
+# project_key: ali-infrastructure
+# tracking_system: file-system
+# story_location: docs/sprint-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - completed: Retrospective has been done by *retrospective
+#
+# WORKFLOW NOTES:
+# ===============
+# - Mark epic as 'in-progress' when starting work on its first story
+# - SM typically drafts next story ONLY after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then Dev runs code-review (fresh context, ideally different LLM)
+
+generated: 2025-12-24 20:23:39
+project: ali-infrastructure
+project_key: ali-infrastructure
+tracking_system: file-system
+story_location: docs/sprint-artifacts
+
+development_status:
+  epic-1: in-progress
+  1-1-bootstrap-remote-state-infrastructure: in-progress
+  1-2-configure-environment-backends-to-use-remote-state: ready-for-dev
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-configure-github-actions-oidc-trust-for-terraform-pipelines: backlog
+  2-2-establish-ack-workload-identity-and-sops-secret-management: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-scaffold-module-and-environment-structure: backlog
+  3-2-implement-foundation-network-module: backlog
+  3-3-deliver-ack-cluster-module-with-helm-add-ons: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-create-terraform-plan-workflow-with-fmt-tflint-validate: backlog
+  4-2-implement-apply-workflow-with-dev-auto-apply-and-prod-approval: backlog
+  epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-automate-documentation-refresh-after-apply: backlog
+  5-2-notify-compliance-reviewers-with-plan-apply-artifacts: backlog
+  epic-5-retrospective: optional
