@@ -1,6 +1,6 @@
 # Story 1.2: Configure Environment Backends to Use Remote State
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -15,15 +15,15 @@ so that Terraform init migrates state into the shared OSS bucket with TableStore
 
 ## Tasks / Subtasks
 
-- [ ] Wire OSS backend definitions into each environment stack (AC: #1)
-  - [ ] Add/verify `backend.tf` under `infra/envs/dev` and `infra/envs/prod` declaring the empty `backend "oss" {}` block so Terraform expects remote state. [Source: docs/architecture.md]
-  - [ ] Provide `backend.hcl.example` in each environment folder with placeholders for `region`, `bucket`, `key`, `profile`, `tablestore_table`, and `tablestore_endpoint`, referencing how to paste actual values from the bootstrap outputs produced in Story 1.1. [Source: docs/guideline/boostrap-2-remote-state.md]
-- [ ] Document bootstrap output consumption and migration workflow (AC: #2)
-  - [ ] In each environment folder README (or create `REMOTE_STATE.md` if README absent) describe how to run `terraform init -backend-config=backend.hcl -migrate-state`, including CloudSSO profile requirements and naming conventions for OSS keys per environment. [Source: docs/guideline/boostrap-2-remote-state.md]
-  - [ ] Capture verification steps (plan twice concurrently to confirm TableStore locking) plus troubleshooting guidance for lock contention, linking back to TableStore key names. [Source: docs/guideline/boostrap-2-remote-state.md]
-- [ ] Confirm developer-ready examples (AC: #2)
-  - [ ] Provide sample `backend.hcl` snippets (commented) inside each environment folder plus CLI snippets in docs so DevOps can copy/paste commands. [Source: docs/architecture.md]
-  - [ ] Ensure `infra/envs/dev` and `infra/envs/prod` reference consistent bucket naming (kebab-case) and snake_case TableStore names per ADR-001 rules. [Source: docs/architecture.md]
+- [x] Wire OSS backend definitions into each environment stack (AC: #1)
+  - [x] Add/verify `backend.tf` under `infra/envs/dev` and `infra/envs/prod` declaring the empty `backend "oss" {}` block so Terraform expects remote state. [Source: docs/architecture.md]
+  - [x] Provide `backend.hcl.example` in each environment folder with placeholders for `region`, `bucket`, `key`, `profile`, `tablestore_table`, and `tablestore_endpoint`, referencing how to paste actual values from the bootstrap outputs produced in Story 1.1. [Source: docs/guideline/boostrap-2-remote-state.md]
+- [x] Document bootstrap output consumption and migration workflow (AC: #2)
+  - [x] In each environment folder README (or create `REMOTE_STATE.md` if README absent) describe how to run `terraform init -backend-config=backend.hcl -migrate-state`, including CloudSSO profile requirements and naming conventions for OSS keys per environment. [Source: docs/guideline/boostrap-2-remote-state.md]
+  - [x] Capture verification steps (plan twice concurrently to confirm TableStore locking) plus troubleshooting guidance for lock contention, linking back to TableStore key names. [Source: docs/guideline/boostrap-2-remote-state.md]
+- [x] Confirm developer-ready examples (AC: #2)
+  - [x] Provide sample `backend.hcl` snippets (commented) inside each environment folder plus CLI snippets in docs so DevOps can copy/paste commands. [Source: docs/architecture.md]
+  - [x] Ensure `infra/envs/dev` and `infra/envs/prod` reference consistent bucket naming (kebab-case) and snake_case TableStore names per ADR-001 rules. [Source: docs/architecture.md]
 
 ## Dev Notes
 
@@ -89,13 +89,22 @@ so that Terraform init migrates state into the shared OSS bucket with TableStore
 ## Dev Agent Record
 
 ### Context Reference
+- No `project-context.md` present; relied on story Dev Notes and architecture docs.
 
 ### Agent Model Used
-
-{{agent_model_name_version}}
+- gpt-5-codex
 
 ### Debug Log References
+- `terraform init -backend-config=backend.hcl -migrate-state` (ran in `infra/envs/dev` to confirm OSS backend works with CloudSSO STS exports)
 
 ### Completion Notes List
+- Replaced both environment `backend.hcl.example` files with placeholder-friendly templates plus inline commands that point to Story 1.1 outputs.
+- Authored `infra/envs/dev/REMOTE_STATE.md` and `infra/envs/prod/REMOTE_STATE.md` covering bootstrap output extraction, `terraform init -backend-config=backend.hcl -migrate-state`, and TableStore lock verification/troubleshooting.
+- Ensured dev/prod instructions standardize on `CloudSSOProfile`, kebab-case OSS bucket naming, and snake_case TableStore identifiers per ADR-001.
 
 ### File List
+- `infra/envs/dev/backend.hcl.example`
+- `infra/envs/dev/REMOTE_STATE.md`
+- `infra/envs/prod/backend.hcl.example`
+- `infra/envs/prod/REMOTE_STATE.md`
+- `scripts/export-aliyun-profile.sh`

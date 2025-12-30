@@ -1,11 +1,11 @@
 # Copy this file to backend.hcl and replace placeholders with Story 1.1 outputs.
 # Run `terraform -chdir=infra/bootstrap/remote-state output -raw <name>` to retrieve values.
 region = "ap-southeast-1"
-bucket = "<terraform output -raw oss_bucket_name>"
-key    = "envs/prod/terraform.tfstate"
-profile = "CloudSSOProfile"
-tablestore_table    = "<terraform output -raw lock_table_name>"
-tablestore_endpoint = "<terraform output -raw ots_endpoint>"
+bucket = "tfstate-sandbox"
+key    = "envs/dev/terraform.tfstate"
+profile = "novamind-sandbox-kun"
+tablestore_table    = "terraform_state_lock"
+tablestore_endpoint = "https://tfstate-sandbox.ap-southeast-1.ots.aliyuncs.com"
 
 # Example (do not commit real values):
 # bucket = "tfstate-sandbox"
