@@ -90,9 +90,18 @@ FR20: Epic 5 – Documentation, Compliance & Adoption
 
 ## Epic List
 
+## Delivery Priority
+
+1) **Epic 3: Terraform Modules & ACK Enablement** — next execution target; CloudSSO + remote state from Epic 1 let us provision ACK locally and unblock downstream work.  
+2) **Epic 2: Identity & Secrets Automation** — needed before CI pipelines can assume roles via OIDC and before secrets flow through SOPS.  
+3) **Epic 4: Pipeline Automation & GitOps Promotion** — depends on Epic 2 identity foundations for OIDC and workload identity.  
+4) **Epic 5: Documentation, Compliance & Adoption** — leverage after pipelines are running to automate audit evidence.  
+5) **Epic 1: Remote State Bootstrap** — completed prerequisite for all environment stacks.
+
 ### Epic 1: Remote State Bootstrap
 Stand up the dedicated remote-state foundation (OSS bucket with versioning + SSE, TableStore instance and lock table, backend configs) so every Terraform stack has consistent storage and locking before any other epic proceeds.
 **FRs covered:** FR14
+**Status:** done (prerequisite)
 
 ### Epic 2: Identity & Secrets Automation
 Implement CloudSSO-driven human access, GitHub Actions OIDC → RAM role federation, ACK workload identity, and SOPS-encrypted configuration management so all environments operate without static credentials.
@@ -101,6 +110,7 @@ Implement CloudSSO-driven human access, GitHub Actions OIDC → RAM role federat
 ### Epic 3: Terraform Modules & ACK Enablement
 Ship reusable Terraform modules that provision AliCloud networking, ACK clusters, and Helm add-ons (NGINX, ExternalDNS, Cert-Manager, ArgoCD) with documented inputs/outputs so platform engineers and DevOps can build environments rapidly and publish modules to a registry.
 **FRs covered:** FR1, FR5, FR6, FR7, FR10, FR18
+**Priority:** next (use CloudSSO + remote state from Epic 1)
 
 ### Epic 4: Pipeline Automation & GitOps Promotion
 Implement GitHub Actions workflows that lint, plan, and apply Terraform across environments with DEV auto-apply and PROD gates, updating documentation hooks and ensuring pipeline artifacts link GitOps handoffs cleanly.
