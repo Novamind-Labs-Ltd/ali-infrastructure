@@ -46,10 +46,10 @@ development_status:
   2-2-establish-ack-workload-identity-and-sops-secret-management: backlog
   epic-2-retrospective: optional
 
-  epic-3: backlog
-  3-1-scaffold-module-and-environment-structure: backlog
-  3-2-implement-foundation-network-module: backlog
-  3-3-deliver-ack-cluster-module-with-helm-add-ons: backlog
+  epic-3: in-progress
+  3-1-scaffold-module-and-environment-structure: done
+  3-2-implement-foundation-network-module: done
+  3-3-deliver-ack-cluster-module-with-helm-add-ons: done
   epic-3-retrospective: optional
 
   epic-4: backlog
