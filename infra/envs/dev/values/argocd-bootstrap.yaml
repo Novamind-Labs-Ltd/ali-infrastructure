@@ -1,0 +1,3 @@
+# Dev values for argocd-bootstrap
+status:
+  bootstrap_instructions: ""

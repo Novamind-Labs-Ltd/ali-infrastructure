@@ -11,3 +11,14 @@ foundation_private_subnet_cidrs = ["10.20.101.0/24", "10.20.102.0/24"]
 foundation_zones                = ["ap-southeast-1a", "ap-southeast-1b"]
 foundation_tags                 = { environment = "prod" }
 nat_gateway_type                = "Enhanced"
+ack_name_prefix                 = "ack-prod"
+ack_kubernetes_version          = "1.34.1-aliyun.1"
+ack_cluster_spec                = "ack.standard"
+ack_service_cidr                = "172.19.0.0/20"
+ack_pod_cidr                    = "172.20.0.0/16"
+ack_node_pool_instance_types    = ["ecs.g6.large"]
+ack_node_pool_desired_size      = 3
+ack_node_pool_disk_size         = 120
+ack_node_pool_disk_category     = "cloud_essd"
+ack_tags                        = { environment = "prod" }
+ack_kubeconfig_path             = "kubeconfig-prod.yaml"

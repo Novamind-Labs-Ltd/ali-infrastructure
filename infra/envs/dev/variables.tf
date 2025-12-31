@@ -64,3 +64,89 @@ variable "nat_gateway_type" {
   description = "NAT gateway type (Standard or Enhanced)."
   default     = "Enhanced"
 }
+
+variable "ack_name_prefix" {
+  type        = string
+  description = "Name prefix for ACK cluster resources."
+}
+
+variable "ack_kubernetes_version" {
+  type        = string
+  description = "Kubernetes version for the ACK cluster."
+  default     = "1.34.1-aliyun.1"
+}
+
+variable "ack_cluster_spec" {
+  type        = string
+  description = "ACK cluster specification tier."
+  default     = "ack.standard"
+}
+
+variable "ack_service_cidr" {
+  type        = string
+  description = "Service CIDR for the ACK cluster."
+  default     = "172.19.0.0/20"
+}
+
+variable "ack_pod_cidr" {
+  type        = string
+  description = "Pod CIDR for the ACK cluster."
+  default     = "172.20.0.0/16"
+}
+
+variable "ack_node_pool_instance_types" {
+  type        = list(string)
+  description = "Instance types for ACK worker nodes."
+}
+
+variable "ack_node_pool_desired_size" {
+  type        = number
+  description = "Desired node count for ACK worker nodes."
+}
+
+variable "ack_node_pool_disk_size" {
+  type        = number
+  description = "System disk size (GB) for ACK worker nodes."
+  default     = 120
+}
+
+variable "ack_node_pool_disk_category" {
+  type        = string
+  description = "System disk category for ACK worker nodes."
+  default     = "cloud_essd"
+}
+
+variable "ack_tags" {
+  type        = map(string)
+  description = "Tags applied to ACK resources."
+  default     = {}
+}
+
+variable "ack_kubeconfig_path" {
+  type        = string
+  description = "Path to the kubeconfig file used by Helm add-ons."
+}
+
+variable "ingress_hostname" {
+  type        = string
+  description = "Ingress hostname assigned to the NGINX load balancer."
+  default     = null
+}
+
+variable "externaldns_zone" {
+  type        = string
+  description = "DNS zone managed by external-dns."
+  default     = null
+}
+
+variable "cert_manager_issuer_name" {
+  type        = string
+  description = "Certificate issuer name created by cert-manager."
+  default     = null
+}
+
+variable "argocd_bootstrap_instructions" {
+  type        = string
+  description = "Instructions for bootstrapping ArgoCD applications."
+  default     = null
+}

@@ -1,0 +1,3 @@
+# Prod values for ingress-nginx
+status:
+  ingress_hostname: ""
