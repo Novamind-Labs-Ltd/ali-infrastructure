@@ -20,7 +20,13 @@ module "foundation_network" {
   environment  = local.environment
   remote_state = local.remote_state
 
-  # TODO: Wire additional inputs for the dev environment.
+  name_prefix           = var.foundation_name_prefix
+  vpc_cidr              = var.foundation_vpc_cidr
+  public_subnet_cidrs   = var.foundation_public_subnet_cidrs
+  private_subnet_cidrs  = var.foundation_private_subnet_cidrs
+  zones                 = var.foundation_zones
+  tags                  = var.foundation_tags
+  nat_gateway_type      = var.nat_gateway_type
 }
 
 module "ack_cluster" {

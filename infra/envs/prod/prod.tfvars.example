@@ -4,3 +4,10 @@ remote_state_key               = "envs/prod/terraform.tfstate"
 remote_state_profile           = "CloudSSOProfile"
 remote_state_tablestore_table  = "<terraform output -raw lock_table_name>"
 remote_state_tablestore_endpoint = "<terraform output -raw tablestore_endpoint>"
+foundation_name_prefix          = "ack-prod"
+foundation_vpc_cidr             = "10.20.0.0/16"
+foundation_public_subnet_cidrs  = ["10.20.1.0/24", "10.20.2.0/24"]
+foundation_private_subnet_cidrs = ["10.20.101.0/24", "10.20.102.0/24"]
+foundation_zones                = ["ap-southeast-1a", "ap-southeast-1b"]
+foundation_tags                 = { environment = "prod" }
+nat_gateway_type                = "Enhanced"

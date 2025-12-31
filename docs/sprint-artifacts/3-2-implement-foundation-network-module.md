@@ -1,6 +1,6 @@
 # Story 3.2: Implement Foundation Network Module
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -15,18 +15,18 @@ so that any environment stack can reuse consistent networking primitives.
 
 ## Tasks / Subtasks
 
-- [ ] Implement `infra/modules/foundation-network/` Terraform module (AC: 1)
-  - [ ] Add `main.tf` with AliCloud VPC, subnets (public/private), NAT gateway, and security groups
-  - [ ] Add `variables.tf` defining CIDR ranges, zones, and tagging inputs
-  - [ ] Add `outputs.tf` exporting VPC ID, subnet IDs, NAT gateway ID, and security group IDs
-- [ ] Provide module documentation (AC: 2)
-  - [ ] Update `infra/modules/foundation-network/README.md` with inputs/outputs tables, example usage, and dependency notes
-- [ ] Align with architecture conventions (AC: 1, 2)
-  - [ ] Use snake_case variable names and kebab-case directory names
-  - [ ] Keep module focused on reusable networking primitives (no environment-specific wiring)
-- [ ] Validate module quality before handoff (AC: 1)
-  - [ ] Run `terraform fmt` and `terraform validate` for the module directory
-  - [ ] Run `tflint` if configured for this repo
+- [x] Implement `infra/modules/foundation-network/` Terraform module (AC: 1)
+  - [x] Add `main.tf` with AliCloud VPC, subnets (public/private), NAT gateway, and security groups
+  - [x] Add `variables.tf` defining CIDR ranges, zones, and tagging inputs
+  - [x] Add `outputs.tf` exporting VPC ID, subnet IDs, NAT gateway ID, and security group IDs
+- [x] Provide module documentation (AC: 2)
+  - [x] Update `infra/modules/foundation-network/README.md` with inputs/outputs tables, example usage, and dependency notes
+- [x] Align with architecture conventions (AC: 1, 2)
+  - [x] Use snake_case variable names and kebab-case directory names
+  - [x] Keep module focused on reusable networking primitives (no environment-specific wiring)
+- [x] Validate module quality before handoff (AC: 1)
+  - [x] Run `terraform fmt` and `terraform validate` for the module directory
+  - [x] Run `tflint` if configured for this repo
 
 ## Dev Notes
 
@@ -73,7 +73,43 @@ GPT-5 (Codex CLI)
 ### Completion Notes List
 
 - Ultimate context engine analysis completed - comprehensive developer guide created
+- Implemented VPC, public/private subnet, NAT gateway, EIP association, SNAT entries, and base security group resources with required providers.
+- Added required networking variables/validations and outputs for VPC, subnets, NAT gateway, and security groups.
+- Tests: `python3 tests/foundation_network_test.py`, `python3 tests/scaffold_structure_test.py`, `python3 tests/remote_state_test.py`.
+- Documented module inputs/outputs, example usage, and dependency notes in README.
+- Tests: `python3 tests/foundation_network_readme_test.py`.
+- Aligned resource naming with module prefix conventions; confirmed module remains env-agnostic.
+- Tests: `python3 tests/foundation_network_naming_test.py`.
+- Validation: `terraform fmt -check` passed locally; `terraform validate` confirmed by user in `infra/envs/dev`.
+- `tflint` not configured in repo.
+- Wired dev/prod environment inputs for foundation-network and refreshed example tfvars.
+- Regression tests rerun: `python3 tests/foundation_network_test.py`, `python3 tests/foundation_network_readme_test.py`, `python3 tests/foundation_network_naming_test.py`, `python3 tests/scaffold_structure_test.py`, `python3 tests/remote_state_test.py`.
+- Added outputs for resource names (VPC, subnets, NAT gateway, security group) to meet AC1.
+- Validation: `terraform validate` confirmed by user in `infra/modules/foundation-network`.
+- Apply troubleshooting: switched NAT to Enhanced, avoided pay-by-spec, and passed `nat_gateway_type` from env; apply succeeded after updates.
 
 ### File List
 
 - docs/sprint-artifacts/3-2-implement-foundation-network-module.md
+- infra/modules/foundation-network/README.md
+- infra/modules/foundation-network/main.tf
+- infra/modules/foundation-network/outputs.tf
+- infra/modules/foundation-network/variables.tf
+- infra/envs/dev/dev.tfvars.example
+- infra/envs/dev/main.tf
+- infra/envs/dev/variables.tf
+- infra/envs/dev/.terraform.lock.hcl
+- infra/envs/prod/main.tf
+- infra/envs/prod/prod.tfvars.example
+- infra/envs/prod/variables.tf
+- infra/envs/dev/dev.tfvars
+- tests/foundation_network_test.py
+- tests/foundation_network_readme_test.py
+- tests/foundation_network_naming_test.py
+- docs/sprint-artifacts/sprint-status.yaml
+
+### Change Log
+
+- 2025-12-30: Implemented foundation-network module, documentation, env wiring, validation notes, and resource name outputs.
+- 2025-12-30: Code review fixes applied and validations confirmed; story marked done.
+- 2025-12-30: Resolved NAT gateway apply errors (Enhanced NAT + pay-by-CU) and documented env wiring for nat_gateway_type.
