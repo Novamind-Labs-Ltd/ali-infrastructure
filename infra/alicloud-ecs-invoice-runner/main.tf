@@ -7,6 +7,8 @@ locals {
   budget_hours       = floor(var.budget_usd / var.estimated_hourly_cost_usd)
   effective_hours    = var.auto_release_hours < local.budget_hours ? var.auto_release_hours : local.budget_hours
   instance_user      = "ubuntu" # default for Ubuntu images
+  # Aliyun expects AutoReleaseTime as UTC timestamp ending with Z (no offset).
+  auto_release_time_utc = formatdate("YYYY-MM-DD'T'hh:mm:ss'Z'", time_offset.release.rfc3339)
 }
 
 # Choose a zone compatible with the instance type
@@ -69,6 +71,10 @@ data "alicloud_images" "ubuntu" {
   most_recent = true
   owners      = "system"
   name_regex  = "^ubuntu_22.*x64.*alibase.*"
+  instance_type = var.instance_type
+  architecture  = "x86_64"
+  os_type       = "linux"
+  status        = "Available"
 }
 
 resource "time_offset" "release" {
@@ -89,11 +95,12 @@ resource "alicloud_instance" "this" {
   key_name = alicloud_key_pair.this.key_pair_name
 
   system_disk_category = var.system_disk_category
-  system_disk_size     = var.system_disk_size
+  # Let ECS default to the image size to avoid size mismatch errors.
+  # system_disk_size     = var.system_disk_size
   system_disk_performance_level = var.system_disk_performance_level
 
-  # Auto release time (UTC RFC3339). Provider accepts RFC3339-like format.
-  auto_release_time = time_offset.release.rfc3339
+  # Auto release time (UTC RFC3339). Use Z suffix to satisfy API format.
+  auto_release_time = local.auto_release_time_utc
 
   # Cloud-init
   user_data = file("${path.module}/user_data.sh")
@@ -117,7 +124,7 @@ output "private_ip" {
 }
 
 output "auto_release_time" {
-  value       = time_offset.release.rfc3339
+  value       = local.auto_release_time_utc
   description = "Planned auto release time (UTC)"
 }
 
