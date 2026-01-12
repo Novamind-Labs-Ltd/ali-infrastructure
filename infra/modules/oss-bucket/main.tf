@@ -4,7 +4,7 @@ terraform {
   required_providers {
     alicloud = {
       source  = "aliyun/alicloud"
-      version = ">= 1.223.0" # Required for alicloud_oss_bucket_cors
+      version = ">= 1.224.0" # Required for alicloud_oss_bucket_public_access_block
     }
   }
 }
@@ -46,12 +46,25 @@ resource "alicloud_oss_bucket" "this" {
 }
 
 # -----------------------------------------------------------------------------
+# Public Access Block (disable when public ACL is needed)
+# -----------------------------------------------------------------------------
+# Must be disabled BEFORE setting public ACL
+
+resource "alicloud_oss_bucket_public_access_block" "this" {
+  count               = var.acl != "private" ? 1 : 0
+  bucket              = alicloud_oss_bucket.this.bucket
+  block_public_access = false
+}
+
+# -----------------------------------------------------------------------------
 # Bucket ACL (separate resource - v1.220.0+)
 # -----------------------------------------------------------------------------
 
 resource "alicloud_oss_bucket_acl" "this" {
   bucket = alicloud_oss_bucket.this.bucket
   acl    = var.acl
+
+  depends_on = [alicloud_oss_bucket_public_access_block.this]
 }
 
 # -----------------------------------------------------------------------------
@@ -62,6 +75,8 @@ resource "alicloud_oss_bucket_cors" "this" {
   count         = var.enable_cors ? 1 : 0
   bucket        = alicloud_oss_bucket.this.bucket
   response_vary = true
+
+  depends_on = [alicloud_oss_bucket_acl.this]
 
   cors_rule {
     allowed_methods = var.cors_allowed_methods

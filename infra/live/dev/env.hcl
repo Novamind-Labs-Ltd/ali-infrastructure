@@ -92,10 +92,10 @@ locals {
   # Fallback: Public-read bucket with Web Folder source.
   # ---------------------------------------------------------------------------
   oss_imgix_name_prefix     = "novamind"
-  oss_imgix_acl             = "private"
+  oss_imgix_acl             = "public-read"
   oss_imgix_force_destroy   = true  # Dev only - allows bucket deletion
   oss_imgix_cors_origins    = ["*"]
-  oss_imgix_create_ram_user = true
+  oss_imgix_create_ram_user = false  # Imgix integration not possible, using OSS Image Processing instead
   oss_imgix_ram_user_name   = "imgix-oss-reader-dev"
   oss_imgix_tags            = { environment = "dev", managed_by = "terragrunt", purpose = "imgix-images" }
 }
