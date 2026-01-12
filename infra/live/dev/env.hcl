@@ -98,4 +98,20 @@ locals {
   oss_imgix_create_ram_user = false  # Imgix integration not possible, using OSS Image Processing instead
   oss_imgix_ram_user_name   = "imgix-oss-reader-dev"
   oss_imgix_tags            = { environment = "dev", managed_by = "terragrunt", purpose = "imgix-images" }
+
+  # ---------------------------------------------------------------------------
+  # ECS Standalone - Invoice Runner Configuration
+  # ---------------------------------------------------------------------------
+  # Standalone ECS instance for invoice processing workload.
+  # State migrated from legacy module on 2026-01-12.
+  # ---------------------------------------------------------------------------
+  ecs_invoice_runner_name      = "invoice-runner"
+  ecs_invoice_runner_type      = "ecs.c9i.large"
+  ecs_invoice_runner_vpc_cidr  = "10.66.0.0/16"
+  ecs_invoice_runner_ssh_cidr  = "0.0.0.0/0"  # TODO: Restrict to your IP/32
+  ecs_invoice_runner_ssh_key   = ""           # Set your SSH public key here
+  ecs_invoice_runner_budget    = 100
+  ecs_invoice_runner_zone_id   = "ap-southeast-1a"
+  ecs_invoice_runner_image_id  = "ubuntu_22_04_x64_20G_alibase_20251226.vhd"
+  ecs_invoice_runner_tags      = { environment = "dev", managed_by = "terragrunt", purpose = "invoice-processing" }
 }

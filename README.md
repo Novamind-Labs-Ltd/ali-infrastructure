@@ -22,6 +22,7 @@ infra/
 │   │   ├── foundation-network/ # VPC, subnets, NAT
 │   │   ├── ack-cluster/        # Managed Kubernetes
 │   │   ├── oss-imgix/          # OSS bucket for images
+│   │   ├── ecs-invoice-runner/ # Standalone ECS for batch jobs
 │   │   └── addons/             # Helm charts
 │   │       ├── ingress-nginx/
 │   │       ├── cert-manager/
@@ -33,7 +34,8 @@ infra/
 │   ├── foundation-network/
 │   ├── ack-cluster/
 │   ├── helm-addon/
-│   └── oss-bucket/
+│   ├── oss-bucket/
+│   └── ecs-standalone/
 └── bootstrap/
     └── remote-state/           # One-time OSS + TableStore setup
 
@@ -133,6 +135,7 @@ terragrunt apply
 | `ack-cluster` | ACK managed Kubernetes + node pool + RRSA |
 | `helm-addon` | Generic Helm chart deployment |
 | `oss-bucket` | OSS bucket with optional RAM user for CDN integration |
+| `ecs-standalone` | Isolated ECS instance with VPC (for batch jobs, dev VMs, etc.) |
 
 ## Commands Reference
 
