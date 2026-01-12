@@ -58,12 +58,12 @@ resource "alicloud_vswitch" "network_private_vswitch" {
 }
 
 resource "alicloud_nat_gateway" "network_nat_gateway" {
-  vpc_id     = alicloud_vpc.network_vpc.id
+  vpc_id           = alicloud_vpc.network_vpc.id
   nat_gateway_name = "${var.name_prefix}-nat"
-  nat_type   = var.nat_gateway_type
-  specification = var.nat_gateway_type == "Standard" ? var.nat_gateway_spec : null
-  vswitch_id = alicloud_vswitch.network_public_vswitch[local.public_subnet_keys[0]].id
-  tags       = var.tags
+  nat_type         = var.nat_gateway_type
+  specification    = var.nat_gateway_type == "Standard" ? var.nat_gateway_spec : null
+  vswitch_id       = alicloud_vswitch.network_public_vswitch[local.public_subnet_keys[0]].id
+  tags             = var.tags
 }
 
 resource "alicloud_eip_address" "network_nat_eip" {
@@ -88,7 +88,7 @@ resource "alicloud_snat_entry" "network_snat_entry" {
 
 resource "alicloud_security_group" "network_default" {
   security_group_name = "${var.name_prefix}-default-sg"
-  vpc_id      = alicloud_vpc.network_vpc.id
-  description = "Default security group for foundation networking."
-  tags        = var.tags
+  vpc_id              = alicloud_vpc.network_vpc.id
+  description         = "Default security group for foundation networking."
+  tags                = var.tags
 }

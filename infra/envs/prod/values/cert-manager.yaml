@@ -1,3 +1,0 @@
-# Prod values for cert-manager
-status:
-  issuer_name: ""

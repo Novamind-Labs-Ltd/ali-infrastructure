@@ -1,0 +1,80 @@
+# -----------------------------------------------------------------------------
+# ArgoCD Values - Dev Environment
+# -----------------------------------------------------------------------------
+# Customize these values for your dev environment.
+# Reference: https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd
+# -----------------------------------------------------------------------------
+
+# Global settings
+global:
+  logging:
+    level: info
+
+# Server configuration
+server:
+  replicas: 1
+
+  # Resource limits for dev
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  # Service type - use LoadBalancer for external access
+  service:
+    type: ClusterIP
+
+  # Ingress configuration (if using ingress-nginx)
+  # ingress:
+  #   enabled: true
+  #   ingressClassName: nginx
+  #   hosts:
+  #     - argocd.dev.example.com
+
+# Repo Server
+repoServer:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Application Controller
+controller:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+# Redis
+redis:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+# Dex (OIDC provider) - disable if not using SSO
+dex:
+  enabled: false
+
+# Notifications - disable for dev
+notifications:
+  enabled: false
+
+# ApplicationSet controller
+applicationSet:
+  enabled: true
+  replicas: 1

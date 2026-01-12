@@ -1,0 +1,33 @@
+# -----------------------------------------------------------------------------
+# Ingress NGINX Values - Dev Environment
+# -----------------------------------------------------------------------------
+# Customize these values for your dev environment.
+# Reference: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
+# -----------------------------------------------------------------------------
+
+controller:
+  # Replica count - use 1 for dev to save costs
+  replicaCount: 1
+
+  # Resource limits for dev
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  # Service configuration
+  service:
+    type: LoadBalancer
+    # annotations:
+    #   service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+
+  # Metrics for monitoring
+  metrics:
+    enabled: true
+
+  # Admission webhooks
+  admissionWebhooks:
+    enabled: true

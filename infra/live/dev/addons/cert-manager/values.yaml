@@ -1,0 +1,43 @@
+# -----------------------------------------------------------------------------
+# Cert Manager Values - Dev Environment
+# -----------------------------------------------------------------------------
+# Customize these values for your dev environment.
+# Reference: https://cert-manager.io/docs/installation/helm/
+# -----------------------------------------------------------------------------
+
+# Install CRDs as part of the Helm release
+crds:
+  enabled: true
+
+# Resource limits for dev
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+# Webhook configuration
+webhook:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+# CA Injector
+cainjector:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+
+# Prometheus metrics
+prometheus:
+  enabled: true

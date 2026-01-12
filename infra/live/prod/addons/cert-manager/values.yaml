@@ -1,0 +1,55 @@
+# -----------------------------------------------------------------------------
+# Cert Manager Values - Prod Environment
+# -----------------------------------------------------------------------------
+# Production-grade configuration with HA.
+# Reference: https://cert-manager.io/docs/installation/helm/
+# -----------------------------------------------------------------------------
+
+# Install CRDs
+crds:
+  enabled: true
+
+# HA configuration
+replicaCount: 2
+
+# Resource limits for production
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+# Webhook configuration
+webhook:
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# CA Injector
+cainjector:
+  replicaCount: 2
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# Prometheus metrics
+prometheus:
+  enabled: true
+  servicemonitor:
+    enabled: true  # If using Prometheus Operator
+
+# Pod disruption budget
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
