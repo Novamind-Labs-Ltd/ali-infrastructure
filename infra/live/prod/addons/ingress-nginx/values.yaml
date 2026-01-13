@@ -1,0 +1,61 @@
+# -----------------------------------------------------------------------------
+# Ingress NGINX Values - Prod Environment
+# -----------------------------------------------------------------------------
+# Production-grade configuration with HA and proper resource allocation.
+# Reference: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
+# -----------------------------------------------------------------------------
+
+controller:
+  # HA configuration - minimum 2 replicas
+  replicaCount: 2
+
+  # Resource limits for production
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+  # Pod disruption budget for HA
+  minAvailable: 1
+
+  # Anti-affinity to spread across nodes
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - ingress-nginx
+            topologyKey: kubernetes.io/hostname
+
+  # Service configuration
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local  # Preserve client IP
+    # annotations:
+    #   service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s2.small
+
+  # Metrics for monitoring
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true  # If using Prometheus Operator
+
+  # Admission webhooks
+  admissionWebhooks:
+    enabled: true
+
+  # Autoscaling
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80

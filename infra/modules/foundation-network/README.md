@@ -9,33 +9,33 @@ Reusable AliCloud networking primitives for ACK environments, including VPC, pub
 
 ## Inputs
 
-| Name | Description | Type | Required | Default |
-| --- | --- | --- | --- | --- |
-| environment | Environment name (e.g., dev, prod). | string | yes | n/a |
-| remote_state | Remote state backend placeholders sourced from bootstrap outputs. | object | yes | n/a |
-| name_prefix | Prefix used for naming network resources. | string | yes | n/a |
-| vpc_cidr | CIDR block for the VPC. | string | yes | n/a |
-| public_subnet_cidrs | CIDR blocks for public subnets (one per zone). | list(string) | yes | n/a |
-| private_subnet_cidrs | CIDR blocks for private subnets (one per zone). | list(string) | yes | n/a |
-| zones | Availability zones for the subnets, aligned by index to the subnet CIDR lists. | list(string) | yes | n/a |
-| tags | Tags applied to all supported resources. | map(string) | no | `{}` |
-| nat_gateway_spec | NAT gateway specification size (Standard NAT only). | string | no | `Small` |
-| nat_gateway_type | NAT gateway type (Standard or Enhanced). | string | no | `Enhanced` |
-| nat_bandwidth_mbps | EIP bandwidth for the NAT gateway. | number | no | `5` |
+| Name                 | Description                                                                    | Type         | Required | Default    |
+| -------------------- | ------------------------------------------------------------------------------ | ------------ | -------- | ---------- |
+| environment          | Environment name (e.g., dev, prod).                                            | string       | yes      | n/a        |
+| remote_state         | Remote state backend placeholders sourced from bootstrap outputs.              | object       | yes      | n/a        |
+| name_prefix          | Prefix used for naming network resources.                                      | string       | yes      | n/a        |
+| vpc_cidr             | CIDR block for the VPC.                                                        | string       | yes      | n/a        |
+| public_subnet_cidrs  | CIDR blocks for public subnets (one per zone).                                 | list(string) | yes      | n/a        |
+| private_subnet_cidrs | CIDR blocks for private subnets (one per zone).                                | list(string) | yes      | n/a        |
+| zones                | Availability zones for the subnets, aligned by index to the subnet CIDR lists. | list(string) | yes      | n/a        |
+| tags                 | Tags applied to all supported resources.                                       | map(string)  | no       | `{}`       |
+| nat_gateway_spec     | NAT gateway specification size (Standard NAT only).                            | string       | no       | `Small`    |
+| nat_gateway_type     | NAT gateway type (Standard or Enhanced).                                       | string       | no       | `Enhanced` |
+| nat_bandwidth_mbps   | EIP bandwidth for the NAT gateway.                                             | number       | no       | `5`        |
 
 ## Outputs
 
-| Name | Description |
-| --- | --- |
-| vpc_id | ID of the VPC. |
-| vpc_name | Name of the VPC. |
-| public_subnet_ids | IDs of the public subnets. |
-| public_subnet_names | Names of the public subnets. |
-| private_subnet_ids | IDs of the private subnets. |
-| private_subnet_names | Names of the private subnets. |
-| nat_gateway_id | ID of the NAT gateway. |
-| nat_gateway_name | Name of the NAT gateway. |
-| security_group_ids | IDs of the security groups created for the VPC. |
+| Name                 | Description                                       |
+| -------------------- | ------------------------------------------------- |
+| vpc_id               | ID of the VPC.                                    |
+| vpc_name             | Name of the VPC.                                  |
+| public_subnet_ids    | IDs of the public subnets.                        |
+| public_subnet_names  | Names of the public subnets.                      |
+| private_subnet_ids   | IDs of the private subnets.                       |
+| private_subnet_names | Names of the private subnets.                     |
+| nat_gateway_id       | ID of the NAT gateway.                            |
+| nat_gateway_name     | Name of the NAT gateway.                          |
+| security_group_ids   | IDs of the security groups created for the VPC.   |
 | security_group_names | Names of the security groups created for the VPC. |
 
 ## Example Usage

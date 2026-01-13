@@ -1,0 +1,54 @@
+# -----------------------------------------------------------------------------
+# External DNS Values - Prod Environment
+# -----------------------------------------------------------------------------
+# Production-grade configuration.
+# Reference: https://github.com/kubernetes-sigs/external-dns/tree/master/charts/external-dns
+# -----------------------------------------------------------------------------
+
+# DNS provider
+provider: alibabacloud
+
+# Resource limits for production
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 256Mi
+
+# Alibaba Cloud configuration
+# alibabacloud:
+#   regionId: ap-southeast-1
+#   zoneType: public
+
+# Source configuration
+sources:
+  - service
+  - ingress
+
+# Policy - sync for production (creates, updates, and deletes)
+policy: sync
+
+# Domain filter - IMPORTANT: restrict to your domains
+# domainFilters:
+#   - prod.example.com
+
+# Registry - use txt records to track ownership
+registry: txt
+txtOwnerId: prod-externaldns
+
+# Log level
+logLevel: info
+
+# Metrics
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true  # If using Prometheus Operator
+
+# Interval between sync runs
+interval: 1m
+
+# Dry run - set to true initially to verify behavior
+# dryRun: true

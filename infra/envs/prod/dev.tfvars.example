@@ -1,6 +1,0 @@
-remote_state_region            = "ap-southeast-1"
-remote_state_bucket            = "<terraform output -raw remote_state_bucket>"
-remote_state_key               = "envs/prod/terraform.tfstate"
-remote_state_profile           = "CloudSSOProfile"
-remote_state_tablestore_table  = "<terraform output -raw lock_table_name>"
-remote_state_tablestore_endpoint = "<terraform output -raw tablestore_endpoint>"

@@ -1,0 +1,42 @@
+# -----------------------------------------------------------------------------
+# External DNS Values - Dev Environment
+# -----------------------------------------------------------------------------
+# Customize these values for your dev environment.
+# Reference: https://github.com/kubernetes-sigs/external-dns/tree/master/charts/external-dns
+# -----------------------------------------------------------------------------
+
+# DNS provider - configure for Alibaba Cloud DNS
+provider: alibabacloud
+
+# Resource limits for dev
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+# Alibaba Cloud configuration
+# alibabacloud:
+#   regionId: ap-southeast-1
+#   zoneType: public  # or "private" for private zones
+
+# Source configuration
+sources:
+  - service
+  - ingress
+
+# Policy - sync creates and updates records
+policy: sync
+
+# Domain filter - only manage records for these domains
+# domainFilters:
+#   - dev.example.com
+
+# Log level
+logLevel: info
+
+# Metrics
+metrics:
+  enabled: true
