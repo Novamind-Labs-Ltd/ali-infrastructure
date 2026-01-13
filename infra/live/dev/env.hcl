@@ -114,4 +114,21 @@ locals {
   ecs_invoice_runner_zone_id   = "ap-southeast-1a"
   ecs_invoice_runner_image_id  = "ubuntu_22_04_x64_20G_alibase_20251226.vhd"
   ecs_invoice_runner_tags      = { environment = "dev", managed_by = "terragrunt", purpose = "invoice-processing" }
+
+  # ---------------------------------------------------------------------------
+  # DNS Public Zone Configuration
+  # ---------------------------------------------------------------------------
+  # Public DNS zone for domain management.
+  # After apply, update NS records at your domain registrar.
+  # ---------------------------------------------------------------------------
+  dns_domain_name         = "novamind-labs.co.nz"
+  dns_create_domain_group = true
+  dns_domain_group_name   = "novamind-zones-dev"
+  dns_remark              = "Dev DNS zone managed by Terragrunt"
+  dns_initial_records     = [
+    # Example records - uncomment and modify as needed:
+    # { rr = "@", type = "TXT", value = "v=spf1 -all", ttl = 3600 },
+    # { rr = "www", type = "CNAME", value = "example.com", ttl = 600 },
+  ]
+  dns_tags = { environment = "dev", managed_by = "terragrunt", purpose = "dns-zone" }
 }
