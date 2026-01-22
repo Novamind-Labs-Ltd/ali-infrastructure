@@ -15,9 +15,9 @@ include "root" {
   path = find_in_parent_folders("root.hcl")
 }
 
-terraform {
-  source = "${dirname(find_in_parent_folders("root.hcl"))}/../modules/ecs-standalone"
-}
+# terraform {
+#   source = "${dirname(find_in_parent_folders("root.hcl"))}/../modules/ecs-standalone"
+# }
 
 locals {
   env = read_terragrunt_config(find_in_parent_folders("env.hcl"))
